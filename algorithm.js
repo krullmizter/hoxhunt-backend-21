@@ -1035,28 +1035,18 @@ const countCriminals = (emails) => {
     if (lastNameArr[i].includes('r')) { // If the last name contains an "r", end that iteration of the loop and move to the next iteration.
       continue;
 
-    } else if (domainArr[i].includes('.co.uk')) { // If the domain is a ".co.uk", and its corresponding local-part contains a "c", then add it to the villain array. 
-      if (fullNameArr[i].includes('c')) {
-        villainArr.push(emails[i]);
+    } else if (domainArr[i].includes('.co.uk') && fullNameArr[i].includes('c')) { // If the domain is a ".co.uk", and its corresponding local-part contains a "c", then add it to the villain array. 
+      villainArr.push(emails[i]);
 
-      } else {
-        continue;
-      }
-
-    } else if (domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) { // if the domain name contains "wonkaindustries" or "gringottsbank", and the length of the firstname is less than 4 then add it to the villain array.
-      if (firstNameArr[i].length >= 4) {
-        villainArr.push(emails[i]);
-
-      } else {
-        continue;
-      }
+    } else if ((domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) && firstNameArr[i].length >= 4) { // if the domain name contains "wonkaindustries" or "gringottsbank", and the length of the firstname is less than 4 then add it to the villain array.
+      villainArr.push(emails[i]);
 
     } else if (fullNameArr[i].match(/[t]{2,}/)) { // If the full name array contains two or more "t"s (regex) then add them to the villain array.
       villainArr.push(emails[i]);
     }
   }
 
-  console.log(villainArr.length);
+  console.log('This many bad guys 👺: ' + villainArr.length);
   return 0;
 }
 
