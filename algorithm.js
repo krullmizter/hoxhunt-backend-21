@@ -1002,6 +1002,7 @@ const emails = [
 ];
 
 const countCriminals = (emails) => {
+  let emailsArr    = [];
   let fullNameArr  = [];
   let firstNameArr = [];
   let lastNameArr  = [];
@@ -1009,12 +1010,15 @@ const countCriminals = (emails) => {
   let villainArr   = [];
 
   /* 
-   * Split every address to its name and domain name, and add to separate arrays.
+   * Split every email address by its local-part and domain name, and add to separate arrays.
    * All of the given email addresses are valid, and contains a local-part, @, and a domain name. 
-   * With that we can drive everything through one for-loop that iterates through the entire initial emails array.
+   * With that we can drive everything through one for-loop that iterates through the entire initial email array.
    * The if-statement handles the logic, beginning from highest value rule and moving down.
    * The use of continue; is there to save time, and resources.
+   * The regex checks for two or more "t"s in a string. 
    */
+
+  const regex = /[t]*([t])\w*\1[t]*/;
 
   for (let i = 0; i < emails.length; i++) {
     let email = emails[i];
@@ -1022,31 +1026,28 @@ const countCriminals = (emails) => {
     fullNameArr.push(email.substring(0, email.lastIndexOf('@')));
 
     let fullName = fullNameArr[i];
-
-    /*
-     * Split the firstname & lastname from the fullNameArr, to their own arrays.
-     * Split the domain name from the original emails array, to its own array.
-     */
-
+    
     firstNameArr.push(fullName.substring(0, fullName.lastIndexOf('.')));
     lastNameArr.push(fullName.substring(fullName.lastIndexOf('.') + 1)); // +1 to not include punctuation.
     domainArr.push(email.substring(email.lastIndexOf('@') + 1));
+    emailsArr.push(email);
 
-    if (lastNameArr[i].includes('r')) { // If the last name contains an "r", end that iteration of the loop and move to the next iteration.
+    if (lastNameArr[i].includes('r')) { // If the last name contains an "r", end that iteration of that current loop and move to the next iteration.
       continue;
 
-    } else if (domainArr[i].includes('.co.uk') && fullNameArr[i].includes('c')) { // If the domain is a ".co.uk", and its corresponding local-part contains a "c", then add it to the villain array. 
-      villainArr.push(emails[i]);
+    } else if (domainArr[i].includes('co.uk') && fullNameArr[i].includes('c')) { // If the domain is a ".co.uk", and its corresponding local-part contains a "c", then add it to the villain array. 
+      villainArr.push(emailsArr[i]);
 
-    } else if ((domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) && firstNameArr[i].length >= 4) { // if the domain name contains "wonkaindustries" or "gringottsbank", and the length of the firstname is less than 4 then add it to the villain array.
-      villainArr.push(emails[i]);
+    } else if ( (domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) && firstNameArr[i].length >= 4) { // if the domain name contains "wonkaindustries" or "gringottsbank", and the length of the first name is less than 4 then add it to the villain array.
+      villainArr.push(emailsArr[i]);
 
-    } else if (fullNameArr[i].match(/[t]{2,}/)) { // If the full name array contains two or more "t"s (regex) then add them to the villain array.
-      villainArr.push(emails[i]);
+    } else if (regex.test(fullNameArr[i])) { // If the full name array contains two or more "t"s (regex) then add them to the villain array.
+      villainArr.push(emailsArr[i]);
     }
   }
 
-  console.log('This many bad guys 👺: ' + villainArr.length);
+  //console.dir(villainArr, {'maxArrayLength': null});
+  console.log('👺 This many bad guys: ' + villainArr.length + "\n#️⃣  It's a prime number!");
   return 0;
 }
 
