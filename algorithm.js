@@ -1026,29 +1026,32 @@ const countCriminals = (emails) => {
     fullNameArr.push(email.substring(0, email.lastIndexOf('@')));
 
     let fullName = fullNameArr[i];
-    
+
     firstNameArr.push(fullName.substring(0, fullName.lastIndexOf('.')));
-    lastNameArr.push(fullName.substring(fullName.lastIndexOf('.') + 1)); // +1 to not include punctuation.
+    lastNameArr.push(fullName.substring(fullName.lastIndexOf('.') + 1));
     domainArr.push(email.substring(email.lastIndexOf('@') + 1));
     emailsArr.push(email);
 
-    if (lastNameArr[i].includes('r')) { // If the last name contains an "r", end that iteration of that current loop and move to the next iteration.
+    if (lastNameArr[i].includes('r')) { 
       continue;
 
-    } else if (domainArr[i].includes('co.uk') && fullNameArr[i].includes('c')) { // If the domain is a ".co.uk", and its corresponding local-part contains a "c", then add it to the villain array. 
+    } else if (domainArr[i].includes('co.uk') && fullNameArr[i].includes('c')) {
       villainArr.push(emailsArr[i]);
-      
-      if ( (domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) && firstNameArr[i].length >= 4) { // if the domain name contains "wonkaindustries" or "gringottsbank", and the length of the first name is less than 4 then add it to the villain array.
-        villainArr.push(emailsArr[i]);
 
-        if (regex.test(fullNameArr[i])) { // If the full name array contains two or more "t"s (regex) then add them to the villain array.
-          villainArr.push(emailsArr[i]);
-        }
-      } 
+    } else if ((domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) && firstNameArr[i].length >= 4) {
+      villainArr.push(emailsArr[i]);
+
+    } else if (regex.test(fullNameArr[i])) {
+
+      if (firstNameArr[i].length >= 4) {
+        villainArr.push(emailsArr[i]);
+      }
     }
   }
 
-  console.dir(villainArr, {'maxArrayLength': null});
+  console.dir(villainArr, {
+    'maxArrayLength': null
+  });
   console.log('👺 This many bad guys: ' + villainArr.length + "\n#️⃣  It's a prime number!");
   return 0;
 }

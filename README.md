@@ -7,7 +7,7 @@ I built the solution with JavaScript, and used Node.js to test out the code. (`n
 
 My solution uses separate arrays that get their data *pushed* to them from the initial `emails` array. I then loop through the `emails` array to handle the logic. 
 
-The `include();` method gets used in the `if-statement` logic to handle what email *rule* to follow , and then add it to the final `villainArray` if the `if-statement` logic is true. 
+The `includes();` method gets used in the `if-statement` logic to handle what email *rule* to follow , and then add it to the final `villainArray` if the `if-statement` logic is true. 
 
 If the first rule of the task is false (i.e. does the last name contain the letter *r*), then I break the for-loop with a `continue;` and move on to the next loop iteration. 
 
