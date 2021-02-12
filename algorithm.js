@@ -1037,16 +1037,18 @@ const countCriminals = (emails) => {
 
     } else if (domainArr[i].includes('co.uk') && fullNameArr[i].includes('c')) { // If the domain is a ".co.uk", and its corresponding local-part contains a "c", then add it to the villain array. 
       villainArr.push(emailsArr[i]);
+      
+      if ( (domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) && firstNameArr[i].length >= 4) { // if the domain name contains "wonkaindustries" or "gringottsbank", and the length of the first name is less than 4 then add it to the villain array.
+        villainArr.push(emailsArr[i]);
 
-    } else if ( (domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) && firstNameArr[i].length >= 4) { // if the domain name contains "wonkaindustries" or "gringottsbank", and the length of the first name is less than 4 then add it to the villain array.
-      villainArr.push(emailsArr[i]);
-
-    } else if (regex.test(fullNameArr[i])) { // If the full name array contains two or more "t"s (regex) then add them to the villain array.
-      villainArr.push(emailsArr[i]);
+        if (regex.test(fullNameArr[i])) { // If the full name array contains two or more "t"s (regex) then add them to the villain array.
+          villainArr.push(emailsArr[i]);
+        }
+      } 
     }
   }
 
-  //console.dir(villainArr, {'maxArrayLength': null});
+  console.dir(villainArr, {'maxArrayLength': null});
   console.log('👺 This many bad guys: ' + villainArr.length + "\n#️⃣  It's a prime number!");
   return 0;
 }
