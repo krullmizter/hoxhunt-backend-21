@@ -6,11 +6,11 @@ I built the solution with JavaScript, and used Node.js to test out the code. `no
 ------------
 #### Execution
 
-My solution uses `for-loop` to go through all the email addresses in the initial emails array. I then split the email addresse into a set of separate array to later be used in the `if-statement` logic.
-
-The `includes();` method gets used in the `if-statement` logic to handle what email *rule* to follow , and then add it to the final `villainArr`.
+My solution uses a `for-loop` to go through all the email addresses in the initial emails array. I then split the email addresses into a set of separate arrays to be used later in the `if-statement` logic.
 
 ##### The logic of the rules
+
+The `includes();` method gets used in the `if-statement` logic to handle what email *rule* to follow, and then add it to the final `villainArr`.
 
 If the first first rule of the `if-statement` logic is true (i.e. If the last name **does**  containt a letter: **r**), then I break the `for-loop` with a `continue;` and move on to the next loop iteration.
 
