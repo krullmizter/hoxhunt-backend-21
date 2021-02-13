@@ -1010,48 +1010,47 @@ const countCriminals = (emails) => {
   let villainArr   = [];
 
   /* 
-   * Split every email address by its local-part and domain name, and add to separate arrays.
-   * All of the given email addresses are valid, and contains a local-part, @, and a domain name. 
+   * All of the given email addresses are valid, so split every email address by its local-part and domain name.
    * With that we can drive everything through one for-loop that iterates through the entire initial email array.
    * The if-statement handles the logic, beginning from highest value rule and moving down.
-   * The use of continue; is there to save time, and resources.
-   * The regex checks for two or more "t"s in a string. 
+   * If one of the statements are true, they then get added to the villain array.
+   * The use of continue; is there to save time, and resources if the last name of any entry includes an "r".
+   * The regex checks for two or more "t"s in a string, in this case it matches any full name with two or more "t"s. 
+   * 👋 For more info please contact me so I can give you access to my GitHub repo for this task. 📫: samgran@outlook.com
    */
 
   const regex = /[t]*([t])\w*\1[t]*/;
 
   for (let i = 0; i < emails.length; i++) {
-    let email = emails[i];
-
-    fullNameArr.push(email.substring(0, email.lastIndexOf('@')));
+    fullNameArr.push(emails[i].substring(0, emails[i].lastIndexOf('@')));
 
     let fullName = fullNameArr[i];
 
     firstNameArr.push(fullName.substring(0, fullName.lastIndexOf('.')));
     lastNameArr.push(fullName.substring(fullName.lastIndexOf('.') + 1));
-    domainArr.push(email.substring(email.lastIndexOf('@') + 1));
-    emailsArr.push(email);
+    domainArr.push(emails[i].substring(emails[i].lastIndexOf('@') + 1));
+    emailsArr.push(emails[i]);
 
-    if (lastNameArr[i].includes('r')) { 
+    if (lastNameArr[i].includes('r')) {
       continue;
 
     } else if (domainArr[i].includes('co.uk') && fullNameArr[i].includes('c')) {
       villainArr.push(emailsArr[i]);
 
-    } else if ((domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) && firstNameArr[i].length >= 4) {
+    } else if ((domainArr[i].includes('wonkaindustries') || domainArr[i].includes('gringottsbank')) && firstNameArr[i].length > 3) {
       villainArr.push(emailsArr[i]);
 
     } else if (regex.test(fullNameArr[i])) {
 
-      if (firstNameArr[i].length >= 4) {
+      if (firstNameArr[i].length > 3) {
         villainArr.push(emailsArr[i]);
       }
     }
   }
 
-  console.dir(villainArr, {
+  /*console.dir(villainArr, {
     'maxArrayLength': null
-  });
+  });*/
   console.log('👺 This many bad guys: ' + villainArr.length + "\n#️⃣  It's a prime number!");
   return 0;
 }
