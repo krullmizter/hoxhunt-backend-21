@@ -6,7 +6,7 @@ I built the solution with JavaScript, and used Node.js to test out the code. `no
 ------------
 #### Execution
 
-My solution uses separate arrays that get their data *pushed* to them from the initial `emails` array. I then loop through the `emails` array to handle the logic with an `if-statement`.
+My solution uses `for-loop` to go through all the email addresses in the initial emails array. I then split the email addresse into a set of separate array to later be used in the `if-statement` logic.
 
 The `includes();` method gets used in the `if-statement` logic to handle what email *rule* to follow , and then add it to the final `villainArr`.
 
