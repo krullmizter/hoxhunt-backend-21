@@ -1,6 +1,6 @@
 A solution to the Hoxhunt 2021 Backend/Frontend summer intern [task](https://hunters.hoxhunt.com/#/challenge), made by: Samuel Granvik 👋
-
 I built the solution with JavaScript, and used Node.js to test out the code. `node algorithm.js`
+
 ------------
 #### Execution
 
