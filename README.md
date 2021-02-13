@@ -16,7 +16,7 @@ If the first first rule of the `if-statement` logic is true (i.e. If the last na
 
 The next `if-else` statements takes care of the lesser rules, and adds the corresponding emails to the `villainArr` if they are true.
 
-The last rule takes advantage of a Reg-ex to check whether the current itterations email address's last name contains two or more **"t"**s. 
+The last rule takes advantage of a Reg-ex to check whether the current itterations email address's last name contains two or more **t**s. 
 
 ------------
 #### Conclusion
